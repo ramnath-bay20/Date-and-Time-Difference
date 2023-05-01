@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date-Time Difference</title>
+</head>
+
+<body>
+    <h1>Date and Time Difference</h1>
+    <form>
+        <label for="date1">Date 1:</label>
+        <input type="date" class="date1" name="date1">
+        <label for="time1">Time 1:</label>
+        <input type="time" class="time1" name="time1">
+        <br>
+        <label for="date2">Date 2:</label>
+        <input type="date" class="date2" name="date2">
+        <label for="time2">Time 2:</label>
+        <input type="time" class="time2" name="time2">
+        <br>
+        <button type="button" onclick="calculate()">Calculate Difference</button>
+    </form>
+    <p class="output"></p>
+    <script>
+        function calculate() {
+            // Get the date and time values from the input fields
+            var date1 = new Date(document.querySelector(".date1").value);
+            var date2 = new Date(document.querySelector(".date2").value);
+            var time1 = new Date('2000-01-01T' + document.querySelector(".time1").value);
+            var time2 = new Date('2000-01-01T' + document.querySelector(".time2").value);
+
+            // Calculate the difference in days between the two dates
+            var diffDays = Math.round(Math.abs((date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000)));
+
+            if (diffDays === 0) {
+                // Calculate the difference in hours and minutes between the two times
+                var diffTime = Math.abs(time2 - time1);
+                var diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+                var diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+                document.querySelector(".output").innerHTML = 'Time difference: ' + diffHours + ' hours ' + diffMinutes + ' minutes';
+            } else {
+                document.querySelector(".output").innerHTML = 'Date difference: ' + diffDays + ' days';
+            }
+        }
+    </script>
+</body>
+
+</html>
